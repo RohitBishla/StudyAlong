@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { FlatList, StyleSheet } from "react-native";
 
-import ListItem from "../components/ListItem";
+import ListItem from "../components/lists/ListItem";
 import Screen from "../components/Screen";
-import ListItemSeprator from "../components/ListItemSeprator";
-import ListItemDeleteAction from "../components/ListItemDeleteAction";
+import ListItemSeparator from "../components/lists/ListItemSeparator";
+import ListItemDeleteAction from "../components/lists/ListItemDeleteAction";
 
 const initialMessages = [
   {
@@ -36,7 +36,7 @@ function MessagesSecreen(props) {
         renderItem={({ item }) => (
           <ListItem
             title={item.title}
-            subtitle={item.discription}
+            subTitle={item.discription}
             image={item.image}
             onPress={() => console.log("message is Pressed: ", item)}
             renderRightActions={() => (
@@ -44,7 +44,7 @@ function MessagesSecreen(props) {
             )}
           />
         )}
-        ItemSeparatorComponent={ListItemSeprator}
+        ItemSeparatorComponent={ListItemSeparator}
         refreshing={refreshing}
         onRefresh={() => {
           setMessages([

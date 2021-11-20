@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, Text, ImageBackground, StyleSheet, View } from "react-native";
+import { ImageBackground, StyleSheet, View } from "react-native";
 import AppButton from "../components/AppButton";
 
 function WelcomeScreen(props) {
