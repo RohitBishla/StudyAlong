@@ -2,18 +2,27 @@ import React from "react";
 import { ImageBackground, StyleSheet, View } from "react-native";
 import AppButton from "../components/AppButton";
 
-function WelcomeScreen(props) {
+function WelcomeScreen({ navigation }) {
   return (
     <View style={styles.main}>
-      <ImageBackground
-        style={styles.studyPhoto}
-        source={require("../assets/study-group.jpg")}
-      ></ImageBackground>
+      <View style={styles.photos}>
+        <ImageBackground
+          style={styles.logoPhoto}
+          source={require("../assets/study-along-logo.gif")}
+        ></ImageBackground>
+        <ImageBackground
+          style={styles.studyPhoto}
+          source={require("../assets/study-group1.jpeg")}
+        ></ImageBackground>
+      </View>
       <View style={styles.buttonContainer}>
-        <AppButton title={"login"} onPress={() => console.log("login")} />
+        <AppButton
+          title={"login"}
+          onPress={() => navigation.navigate("Login")}
+        />
         <AppButton
           title={"Register"}
-          onPress={() => console.log("register")}
+          onPress={() => navigation.navigate("Register")}
           color={"secondary"}
         />
       </View>
@@ -27,18 +36,31 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-end",
   },
-  studyPhoto: {
+  photos: {
     position: "absolute",
-    top: 40,
-    height: 300,
+    top: "8%",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+  },
+  studyPhoto: {
+    // position: "absolute",
+    top: 100,
+    height: 250,
     width: "100%",
 
     // justifyContent: "flex-end",
     // alignItems: "center",
   },
+  logoPhoto: {
+    // position: "absolute",
+    // top: "6%",
+    height: 100,
+    width: "100%",
+  },
   buttonContainer: {
     width: "100%",
-    bottom: 20,
+    bottom: 50,
   },
 });
 export default WelcomeScreen;
