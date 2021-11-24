@@ -9,18 +9,20 @@ import ListItemDeleteAction from "../components/lists/ListItemDeleteAction";
 const initialMessages = [
   {
     id: 1,
-    title: "Username-1",
-    discription: "Discription-1",
-    image: require("../assets/profile_pic.jpeg"),
+    title: "UserName 1",
+    description: "Hey! Is this a correct answer?",
+    image: require("../assets/images2.jpeg"),
   },
   {
     id: 2,
-    title: "Username-2",
-    discription: "Discription-2",
+    title: "UserName 2",
+    description:
+      "I'm interested in this question. When will you be able to solve it?",
     image: require("../assets/profile_pic.jpeg"),
   },
 ];
-function MessagesSecreen(props) {
+
+function MessagesScreen(props) {
   const [messages, setMessages] = useState(initialMessages);
   const [refreshing, setRefreshing] = useState(false);
 
@@ -28,6 +30,7 @@ function MessagesSecreen(props) {
     // Delete the message from messages
     setMessages(messages.filter((m) => m.id !== message.id));
   };
+
   return (
     <Screen>
       <FlatList
@@ -36,9 +39,9 @@ function MessagesSecreen(props) {
         renderItem={({ item }) => (
           <ListItem
             title={item.title}
-            subTitle={item.discription}
+            subTitle={item.description}
             image={item.image}
-            onPress={() => console.log("message is Pressed: ", item)}
+            onPress={() => console.log("Message selected", item)}
             renderRightActions={() => (
               <ListItemDeleteAction onPress={() => handleDelete(item)} />
             )}
@@ -50,8 +53,8 @@ function MessagesSecreen(props) {
           setMessages([
             {
               id: 3,
-              title: "Username-3",
-              discription: "Discription-3",
+              title: "T2",
+              description: "D2",
               image: require("../assets/profile_pic.jpeg"),
             },
           ]);
@@ -60,5 +63,7 @@ function MessagesSecreen(props) {
     </Screen>
   );
 }
+
 const styles = StyleSheet.create({});
-export default MessagesSecreen;
+
+export default MessagesScreen;

@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Image, View } from "react-native";
+import { StyleSheet, Image, View, ScrollView } from "react-native";
 import * as Yup from "yup";
 
 import Screen from "../components/Screen";
@@ -14,33 +14,35 @@ function LoginScreen(props) {
   return (
     <Screen>
       <Image style={styles.image} source={require("../assets/2.png")} />
-      <View style={styles.container}>
-        <AppForm
-          initialValues={{ email: "", password: "" }}
-          onSubmit={(values) => console.log(values)}
-          validationSchema={validationSchema}
-        >
-          <AppFormField
-            autoCapitalize="none"
-            autoCorrect={false}
-            icon="email"
-            keyboardType="email-address"
-            name="email"
-            placeholder="Email"
-            textContentType="emailAddress"
-          />
-          <AppFormField
-            autoCapitalize="none"
-            autoCorrect={false}
-            icon="lock"
-            name="password"
-            placeholder="Password"
-            secureTextEntry
-            textContentType="password"
-          />
-          <SubmitButton title="Login" />
-        </AppForm>
-      </View>
+      <ScrollView>
+        <View style={styles.container}>
+          <AppForm
+            initialValues={{ email: "", password: "" }}
+            onSubmit={(values) => console.log(values)}
+            validationSchema={validationSchema}
+          >
+            <AppFormField
+              autoCapitalize="none"
+              autoCorrect={false}
+              icon="email"
+              keyboardType="email-address"
+              name="email"
+              placeholder="Email"
+              textContentType="emailAddress"
+            />
+            <AppFormField
+              autoCapitalize="none"
+              autoCorrect={false}
+              icon="lock"
+              name="password"
+              placeholder="Password"
+              secureTextEntry
+              textContentType="password"
+            />
+            <SubmitButton title="Login" />
+          </AppForm>
+        </View>
+      </ScrollView>
     </Screen>
   );
 }
@@ -53,8 +55,8 @@ const styles = StyleSheet.create({
     width: "80%",
     height: "50%",
     alignSelf: "center",
-    marginTop: 50,
-    marginBottom: 20,
+    // marginTop: 50,
+    marginBottom: "10%",
   },
 });
 

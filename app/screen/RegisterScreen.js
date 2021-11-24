@@ -8,6 +8,7 @@ import {
   AppFormField as FormField,
   SubmitButton,
 } from "../components/forms";
+import { ScrollView } from "react-native-gesture-handler";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required().label("Name"),
@@ -19,39 +20,41 @@ function RegisterScreen() {
   return (
     <Screen>
       <Image style={styles.image} source={require("../assets/grp.jpeg")} />
-      <View style={styles.container}>
-        <Form
-          initialValues={{ name: "", email: "", password: "" }}
-          onSubmit={(values) => console.log(values)}
-          validationSchema={validationSchema}
-        >
-          <FormField
-            autoCorrect={false}
-            icon="account"
-            name="name"
-            placeholder="Name"
-          />
-          <FormField
-            autoCapitalize="none"
-            autoCorrect={false}
-            icon="email"
-            keyboardType="email-address"
-            name="email"
-            placeholder="Email"
-            textContentType="emailAddress"
-          />
-          <FormField
-            autoCapitalize="none"
-            autoCorrect={false}
-            icon="lock"
-            name="password"
-            placeholder="Password"
-            secureTextEntry
-            textContentType="password"
-          />
-          <SubmitButton title="Register" />
-        </Form>
-      </View>
+      <ScrollView style={{ flex: 1 }}>
+        <View style={styles.container}>
+          <Form
+            initialValues={{ name: "", email: "", password: "" }}
+            onSubmit={(values) => console.log(values)}
+            validationSchema={validationSchema}
+          >
+            <FormField
+              autoCorrect={false}
+              icon="account"
+              name="name"
+              placeholder="Name"
+            />
+            <FormField
+              autoCapitalize="none"
+              autoCorrect={false}
+              icon="email"
+              keyboardType="email-address"
+              name="email"
+              placeholder="Email"
+              textContentType="emailAddress"
+            />
+            <FormField
+              autoCapitalize="none"
+              autoCorrect={false}
+              icon="lock"
+              name="password"
+              placeholder="Password"
+              secureTextEntry
+              textContentType="password"
+            />
+            <SubmitButton title="Register" />
+          </Form>
+        </View>
+      </ScrollView>
     </Screen>
   );
 }
@@ -59,13 +62,14 @@ function RegisterScreen() {
 const styles = StyleSheet.create({
   container: {
     padding: 10,
+    paddingBottom: 1,
   },
   image: {
-    width: "80%",
-    height: "50%",
+    width: "100%",
+    height: "40%",
     alignSelf: "center",
-    marginTop: 10,
-    // marginBottom: 40,
+    // marginTop: 10,
+    marginBottom: 10,
   },
 });
 

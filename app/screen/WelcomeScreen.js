@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   },
   studyPhoto: {
     // position: "absolute",
-    top: 100,
+    top: "10%",
     height: 250,
     width: "100%",
 
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     width: "100%",
-    bottom: 50,
+    bottom: "5%",
   },
 });
 export default WelcomeScreen;
