@@ -7,6 +7,7 @@ import NewListingButton from "./NewListingButton";
 import routes from "./routes";
 import CreateRoom from "../screen/CreateRoom";
 import MessagesScreen from "../screen/MessagesScreen";
+import TimerScreen from "../screen/TimerScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -19,8 +20,8 @@ const AppNavigator = () => (
     }}
   >
     <Tab.Screen
-      name="Messages"
-      component={MessagesScreen}
+      name="Self Study"
+      component={TimerScreen}
       options={{
         tabBarIcon: ({ color, size }) => (
           <MaterialCommunityIcons name="home" color={color} size={size} />
