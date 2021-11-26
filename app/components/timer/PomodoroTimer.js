@@ -75,7 +75,7 @@ class PomodoroTimer extends React.Component {
               style={styles.textStyle}
               keyboardType={"numeric"}
               defaultValue={"" + this.state.workTime}
-              placeholder="workTime in mins"
+              placeholder="studyTime in mins"
               onChangeText={this.handleWorkTime}
             />
           </View>

@@ -1,16 +1,67 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View, TextInput, Image, Button } from "react-native";
-import { Formik } from "formik";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  Image,
+  Button,
+  ScrollView,
+} from "react-native";
+
+import Screen from "../components/Screen";
+import { AppForm, AppFormField, SubmitButton } from "../components/forms";
 
 export default function CreateRoom() {
   return (
-    <View style={styles.globalStylesContainer}>
-      <Image
-        source={require("../assets/study_along.jpeg")}
-        style={{ width: 300, height: 300 }}
-      />
-      <Formik
+    <Screen>
+      <ScrollView>
+        <View style={styles.container}>
+          <AppForm
+            initialValues={{ join: "" }}
+            onSubmit={(values) => console.log(values)}
+          >
+            <View style={styles.container1}>
+              <AppFormField
+                autoCapitalize="none"
+                autoCorrect={false}
+                icon="numeric"
+                keyboardType="numeric"
+                name="join"
+                placeholder="Group Code"
+              />
+            </View>
+            <SubmitButton title="Join Group" />
+          </AppForm>
+          <Image
+            style={styles.image}
+            source={require("../assets/study-along-logo.gif")}
+          />
+          <View style={styles.second}>
+            <AppForm
+              initialValues={{ name: "", description: "" }}
+              onSubmit={(values) => console.log(values)}
+            >
+              <AppFormField
+                autoCapitalize="none"
+                autoCorrect={false}
+                name="name"
+                placeholder="Name of subject"
+              />
+              <AppFormField
+                autoCapitalize="none"
+                autoCorrect={false}
+                name="description"
+                placeholder="Description"
+                multiline
+              />
+              <SubmitButton title="Create room" />
+            </AppForm>
+          </View>
+        </View>
+      </ScrollView>
+      {/* <Formik
         initialValues={{ name: "", description: "" }}
         onSubmit={(values, actions) => {
           actions.resetForm();
@@ -39,36 +90,37 @@ export default function CreateRoom() {
             />
           </View>
         )}
-      </Formik>
-      <StatusBar style="auto"></StatusBar>
-    </View>
+      </Formik> */}
+      {/* <StatusBar style="auto"></StatusBar> */}
+    </Screen>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "space-evenly",
-  },
-  globalStylesContainer: {
-    flex: 1,
+    // width: "80%",
+    // height: 200,
+    // marginLeft: 20,
+    // marginRight: 200,
+    // backgroundColor: "#fff",
+    // alignItems: "center",
+    // justifyContent: "center",
     padding: 10,
-    backgroundColor: "#fff",
+    flex: 1,
+    // justifyContent: "space-evenly",
+  },
+  container1: {
+    paddingLeft: "27%",
+    paddingRight: "27%",
+  },
+  second: {
+    // paddingTop: 10,
+  },
+  image: {
     alignItems: "center",
-    justifyContent: "space-evenly",
-  },
-  globalStylesInput: {
-    borderWidth: 2,
-    borderColor: "#ddd",
-    padding: 15,
-    fontSize: 18,
-    borderRadius: 6,
-  },
-  globalStylesTitleText: {
-    fontFamily: "nunito-bold",
-    fontSize: 18,
-    color: "#333",
+    justifyContent: "center",
+    width: "100%",
+    height: 100,
+    paddingTop: 150,
   },
 });
