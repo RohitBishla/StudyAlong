@@ -7,7 +7,8 @@ import ListItemSeparator from "../components/lists/ListItemSeparator";
 import Screen from "../components/Screen";
 import colors from "../config/colors";
 import routes from "../navigation/routes";
-
+import { auth } from "../../firebase/firebase";
+import { UserInterfaceIdiom } from "expo-constants";
 function AccountScreen({ navigation }) {
   const MenuItem = [
     {
@@ -27,13 +28,13 @@ function AccountScreen({ navigation }) {
       targetScreen: routes.MESSAGES,
     },
   ];
-
+  const user = auth.currentUser;
   return (
     <Screen style={styles.screen}>
       <View style={styles.container}>
         <ListItem
-          title="Rohit Bishla"
-          subTitle="rohit.btele20@pec.edu.in"
+          title={user.displayName}
+          subTitle={user.email}
           image={require("../assets/profile_pic.jpeg")}
         />
       </View>
@@ -58,6 +59,9 @@ function AccountScreen({ navigation }) {
       </View>
       <ListItem
         title="Log Out"
+        onPress={() =>
+          auth.signOut().then(() => console.log("User signed out!"))
+        }
         IconComponent={<Icon name="logout" backgroundColor="#ffe66d" />}
       />
     </Screen>

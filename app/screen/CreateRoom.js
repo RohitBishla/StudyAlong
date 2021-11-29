@@ -12,6 +12,9 @@ import {
 
 import Screen from "../components/Screen";
 import { AppForm, AppFormField, SubmitButton } from "../components/forms";
+import colors from "../config/colors";
+import { Colors } from "react-native/Libraries/NewAppScreen";
+import AppButton from "../components/AppButton";
 
 export default function CreateRoom() {
   return (
@@ -56,7 +59,7 @@ export default function CreateRoom() {
                 placeholder="Description"
                 multiline
               />
-              <SubmitButton title="Create room" />
+              <AppButton title="Create room" color={"secondary"} />
             </AppForm>
           </View>
         </View>

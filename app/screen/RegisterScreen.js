@@ -1,6 +1,8 @@
 import React from "react";
-import { StyleSheet, Image, View } from "react-native";
+import { StyleSheet, Image, View, Alert } from "react-native";
 import * as Yup from "yup";
+
+import { auth } from "../../firebase/firebase";
 
 import Screen from "../components/Screen";
 import {
@@ -10,13 +12,32 @@ import {
 } from "../components/forms";
 import { ScrollView } from "react-native-gesture-handler";
 
-const validationSchema = Yup.object().shape({
-  name: Yup.string().required().label("Name"),
-  email: Yup.string().required().email().label("Email"),
-  password: Yup.string().required().min(8).label("Password"),
-});
-
 function RegisterScreen() {
+  const validationSchema = Yup.object().shape({
+    name: Yup.string().required().label("Name"),
+    email: Yup.string().required().email().label("Email"),
+    password: Yup.string().required().min(8).label("Password"),
+  });
+
+  const handleSignUp = (values) => {
+    auth
+      .createUserWithEmailAndPassword(values.email, values.password)
+      .then((userCredentials) => {
+        if (userCredentials.user) {
+          userCredentials.user.updateProfile({
+            displayName: values.name,
+          });
+        }
+        userCredentials.user.sendEmailVerification();
+        auth.signOut();
+        alert("Email sent");
+      })
+      .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        Alert.alert("Failure!!", errorMessage);
+      });
+  };
   return (
     <Screen>
       <Image style={styles.image} source={require("../assets/grp.jpeg")} />
@@ -24,7 +45,7 @@ function RegisterScreen() {
         <View style={styles.container}>
           <Form
             initialValues={{ name: "", email: "", password: "" }}
-            onSubmit={(values) => console.log(values)}
+            onSubmit={(values) => handleSignUp(values)}
             validationSchema={validationSchema}
           >
             <FormField

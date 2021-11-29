@@ -1,6 +1,8 @@
-import React from "react";
-import { StyleSheet, Image, View, ScrollView } from "react-native";
+import React, { useEffect } from "react";
+import { StyleSheet, Image, View, ScrollView, Alert } from "react-native";
 import * as Yup from "yup";
+
+import { auth } from "../../firebase/firebase";
 
 import Screen from "../components/Screen";
 import { AppForm, AppFormField, SubmitButton } from "../components/forms";
@@ -10,7 +12,25 @@ const validationSchema = Yup.object().shape({
   password: Yup.string().required().min(8).label("Password"),
 });
 
-function LoginScreen(props) {
+function LoginScreen() {
+  const handleLogin = (values) => {
+    auth
+      .signInWithEmailAndPassword(values.email, values.password)
+      .then((userCredential) => {
+        // Signed in
+        var user = userCredential.user;
+        // Alert.alert("Success!!");
+        console.log(user);
+
+        // ...
+      })
+      .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        Alert.alert("Failure!!", errorMessage);
+        // ..
+      });
+  };
   return (
     <Screen>
       <Image style={styles.image} source={require("../assets/2.png")} />
@@ -18,7 +38,7 @@ function LoginScreen(props) {
         <View style={styles.container}>
           <AppForm
             initialValues={{ email: "", password: "" }}
-            onSubmit={(values) => console.log(values)}
+            onSubmit={(values) => handleLogin(values)}
             validationSchema={validationSchema}
           >
             <AppFormField
