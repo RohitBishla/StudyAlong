@@ -50,15 +50,16 @@ const styles = StyleSheet.create({
   },
   buttonStyle: {
     alignItems: "center",
-    backgroundColor: colors.primary,
+    backgroundColor: colors.secondary,
     padding: 30,
     flexDirection: "row",
-    borderRadius: 80,
+    borderRadius: 50,
   },
   buttonText: {
     color: "white",
+
     fontSize: 25,
-    fontWeight: "300",
+    fontWeight: "bold",
   },
 });
 

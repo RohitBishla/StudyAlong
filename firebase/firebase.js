@@ -20,6 +20,7 @@
 // export const storage = firebase.storage();
 import firebase from "firebase/app";
 import "firebase/auth";
+import "firebase/firestore";
 import { firebaseConfig } from "./config";
 
 if (!firebase.apps.length) {
@@ -31,3 +32,4 @@ if (!firebase.apps.length) {
 export const firebaseSupport = firebase;
 
 export const auth = firebase.auth();
+export const db = firebase.firestore();

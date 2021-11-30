@@ -8,6 +8,7 @@ import routes from "./routes";
 import CreateRoom from "../screen/CreateRoom";
 import MessagesScreen from "../screen/MessagesScreen";
 import TimerScreen from "../screen/TimerScreen";
+import Chat from "../screen/Chat";
 
 const Tab = createBottomTabNavigator();
 
@@ -15,7 +16,7 @@ const AppNavigator = () => (
   <Tab.Navigator
     tabBarOptions={{
       style: {
-        bottom: 3,
+        bottom: 5,
       },
     }}
   >
@@ -25,6 +26,15 @@ const AppNavigator = () => (
       options={{
         tabBarIcon: ({ color, size }) => (
           <MaterialCommunityIcons name="home" color={color} size={size} />
+        ),
+      }}
+    />
+    <Tab.Screen
+      name="Groups"
+      component={Chat}
+      options={{
+        tabBarIcon: ({ color, size }) => (
+          <MaterialCommunityIcons name="message" color={color} size={size} />
         ),
       }}
     />
@@ -45,6 +55,15 @@ const AppNavigator = () => (
         //   />
         // ),
       })}
+    />
+    <Tab.Screen
+      name="Favorite"
+      component={MessagesScreen}
+      options={{
+        tabBarIcon: ({ color, size }) => (
+          <MaterialCommunityIcons name="heart" color={color} size={size} />
+        ),
+      }}
     />
     <Tab.Screen
       name="Account"

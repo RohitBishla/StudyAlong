@@ -24,13 +24,13 @@ export default TimerDisplay;
 const styles = StyleSheet.create({
   container: {
     marginTop: "7%",
-    marginBottom: "10%",
+    marginBottom: "7%",
     marginLeft: "7%",
     marginRight: "7%",
-    padding: "20%",
+    padding: "15%",
     borderColor: "white",
-    borderRadius: 80,
-    borderWidth: 5,
+    borderRadius: 100,
+    borderWidth: 3,
     alignItems: "center",
     backgroundColor: colors.primary,
   },
