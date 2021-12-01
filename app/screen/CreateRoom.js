@@ -1,5 +1,6 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useState } from "react";
+import uuid from "react-native-uuid";
 import {
   StyleSheet,
   Text,
@@ -11,31 +12,118 @@ import {
 } from "react-native";
 
 import Screen from "../components/Screen";
-import { AppForm, AppFormField, SubmitButton } from "../components/forms";
+import {
+  AppForm,
+  AppFormField,
+  ErrorMessage,
+  SubmitButton,
+} from "../components/forms";
 import colors from "../config/colors";
 import { Colors } from "react-native/Libraries/NewAppScreen";
-import AppButton from "../components/AppButton";
+// import SubmitButton from "../components/SubmitButton";
+import { auth, db } from "../../firebase/firebase";
 
 export default function CreateRoom() {
+  // const { loggedInMail, setCreateClassDialog } = useLocalContext();
+  const user = auth.currentUser;
+  const [error, setError] = useState(false);
+  const [joinedData, setJoinedData] = useState();
+  const [classExists, setClassExists] = useState(false);
+
+  const handleJoin = (values) => {
+    // e.preventDefault();
+    console.log(values);
+    db.collection("CreatedClasses")
+      .doc(values.ownerEmail)
+      .collection("classes")
+      .doc(values.classCode)
+      .get()
+      .then((doc) => {
+        if (doc.exists && doc.owner !== user.email) {
+          setClassExists(true);
+          setJoinedData(doc.data());
+          setError(false);
+        } else {
+          alert("No class was found");
+          setError(true);
+          setClassExists(false);
+          return;
+        }
+      });
+
+    if (classExists === true) {
+      db.collection("JoinedClasses")
+        .doc(user.email)
+        .collection("classes")
+        .doc(values.classCode)
+        .set({
+          joinedData,
+        })
+        .then(() => {
+          alert("Done");
+        })
+        .catch((error) => {
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          Alert.alert("Failure!!", errorMessage);
+        });
+    }
+  };
+  const addClass = (values) => {
+    // values.preventDefault();
+    console.log(values);
+    const id = uuid.v4();
+    db.collection("CreatedClasses")
+      .doc(user.email)
+      .collection("classes")
+      .doc(id)
+      .set({
+        owner: user.email,
+        className: values.name,
+        // section: Section,
+        description: values.description,
+        id: id,
+      })
+      .then(() => {
+        // setCreateClassDialog(false);
+        console.log({
+          owner: user.email,
+          className: values.name,
+          // section: Section,
+          description: values.description,
+          id: id,
+        });
+        alert("Done");
+      })
+      .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        Alert.alert("Failure!!", errorMessage);
+      });
+  };
   return (
     <Screen>
       <ScrollView>
         <View style={styles.container}>
           <AppForm
-            initialValues={{ join: "" }}
-            onSubmit={(values) => console.log(values)}
+            initialValues={{ classCode: "", ownerEmail: "" }}
+            onSubmit={(values) => handleJoin(values)}
           >
-            <View style={styles.container1}>
-              <AppFormField
-                autoCapitalize="none"
-                autoCorrect={false}
-                icon="numeric"
-                keyboardType="numeric"
-                name="join"
-                placeholder="Group Code"
-              />
-            </View>
-            <SubmitButton title="Join Group" />
+            <AppFormField
+              autoCapitalize="none"
+              autoCorrect={false}
+              name="classCode"
+              placeholder="Class Code"
+              // error={error}
+              // helperText={error && "No class was found"}
+            />
+            <AppFormField
+              autoCapitalize="none"
+              autoCorrect={false}
+              name="ownerEmail"
+              placeholder="Owner's email"
+            />
+            <SubmitButton title="Join Class" />
           </AppForm>
           <Image
             style={styles.image}
@@ -44,7 +132,7 @@ export default function CreateRoom() {
           <View style={styles.second}>
             <AppForm
               initialValues={{ name: "", description: "" }}
-              onSubmit={(values) => console.log(values)}
+              onSubmit={(values) => addClass(values)}
             >
               <AppFormField
                 autoCapitalize="none"
@@ -59,7 +147,7 @@ export default function CreateRoom() {
                 placeholder="Description"
                 multiline
               />
-              <AppButton title="Create room" color={"secondary"} />
+              <SubmitButton title="Create room" color={"secondary"} />
             </AppForm>
           </View>
         </View>
