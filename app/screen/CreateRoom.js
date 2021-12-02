@@ -1,38 +1,20 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import uuid from "react-native-uuid";
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  Image,
-  Button,
-  ScrollView,
-} from "react-native";
+import { StyleSheet, View, Image, ScrollView } from "react-native";
 
 import Screen from "../components/Screen";
-import {
-  AppForm,
-  AppFormField,
-  ErrorMessage,
-  SubmitButton,
-} from "../components/forms";
-import colors from "../config/colors";
-import { Colors } from "react-native/Libraries/NewAppScreen";
-// import SubmitButton from "../components/SubmitButton";
+import { AppForm, AppFormField, SubmitButton } from "../components/forms";
 import { auth, db } from "../../firebase/firebase";
 
 export default function CreateRoom() {
-  // const { loggedInMail, setCreateClassDialog } = useLocalContext();
   const user = auth.currentUser;
   const [error, setError] = useState(false);
   const [joinedData, setJoinedData] = useState();
   const [classExists, setClassExists] = useState(false);
 
   const handleJoin = (values) => {
-    // e.preventDefault();
-    console.log(values);
+    // console.log(values);
     db.collection("CreatedClasses")
       .doc(values.ownerEmail)
       .collection("classes")
@@ -71,7 +53,7 @@ export default function CreateRoom() {
   };
   const addClass = (values) => {
     // values.preventDefault();
-    console.log(values);
+    // console.log(values);
     const id = uuid.v4();
     db.collection("CreatedClasses")
       .doc(user.email)

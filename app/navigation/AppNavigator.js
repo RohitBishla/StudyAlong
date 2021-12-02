@@ -9,7 +9,8 @@ import CreateRoom from "../screen/CreateRoom";
 import MessagesScreen from "../screen/MessagesScreen";
 import TimerScreen from "../screen/TimerScreen";
 import Chat from "../screen/Chat";
-
+import GroupsList from "../screen/GroupsList";
+import ChatNavigator from "./ChatNavigator";
 const Tab = createBottomTabNavigator();
 
 const AppNavigator = () => (
@@ -31,7 +32,7 @@ const AppNavigator = () => (
     />
     <Tab.Screen
       name="Groups"
-      component={Chat}
+      component={ChatNavigator}
       options={{
         tabBarIcon: ({ color, size }) => (
           <MaterialCommunityIcons name="message" color={color} size={size} />
