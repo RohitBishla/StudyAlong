@@ -7,4 +7,5 @@ export default Object.freeze({
   CREATEROOM: "CreateRoom",
   GROUPSLIST: "GroupsList",
   CHAT: "Chat",
+  LISTINGDETAILSSCREEN: "ListingDetailsScreen",
 });

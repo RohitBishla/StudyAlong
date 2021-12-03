@@ -77,7 +77,11 @@ function GroupList({ navigation }) {
             title={item.className}
             subTitle={item.description}
             image={require("../assets/images2.jpeg")}
-            onPress={() => navigation.navigate("Chat", { groupId: item.id })}
+            onPress={() =>
+              navigation.navigate("Chat", {
+                groupId: [item.id, item.className],
+              })
+            }
             renderRightActions={() => (
               <ListItemDeleteAction onPress={() => handleDelete(item)} />
             )}

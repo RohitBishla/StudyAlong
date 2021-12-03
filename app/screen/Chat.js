@@ -4,12 +4,14 @@ import React, {
   useEffect,
   useState,
 } from "react";
+
 import { GiftedChat } from "react-native-gifted-chat";
 import { auth, db } from "../../firebase/firebase";
 
 function Chat(groupId) {
-  console.log("Hello ", groupId.route.params.groupId);
-  const groupChatsid = groupId.route.params.groupId;
+  // console.log("1", groupId);
+  // console.log("Hello ", groupId.route.params.groupId);
+  const groupChatsid = groupId.route.params.groupId[0];
   const [messages, setMessages] = useState([]);
 
   //   useEffect(() => {
