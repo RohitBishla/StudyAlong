@@ -7,7 +7,9 @@ import React, {
 import { GiftedChat } from "react-native-gifted-chat";
 import { auth, db } from "../../firebase/firebase";
 
-function Chat() {
+function Chat(groupId) {
+  console.log("Hello ", groupId.route.params.groupId);
+  const groupChatsid = groupId.route.params.groupId;
   const [messages, setMessages] = useState([]);
 
   //   useEffect(() => {
@@ -26,7 +28,7 @@ function Chat() {
   //   }, []);
   useLayoutEffect(() => {
     const unsubscribe = db
-      .collection("chats")
+      .collection(groupChatsid)
       .orderBy("createdAt", "desc")
       .onSnapshot((snapshot) =>
         setMessages(
@@ -46,7 +48,7 @@ function Chat() {
       GiftedChat.append(previousMessages, messages)
     );
     const { _id, createdAt, text, user } = messages[0];
-    db.collection("chats").add({ _id, createdAt, text, user });
+    db.collection(groupChatsid).add({ _id, createdAt, text, user });
   }, []);
   return (
     <GiftedChat
