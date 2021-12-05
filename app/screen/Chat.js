@@ -1,6 +1,5 @@
 import React, { useCallback, useLayoutEffect, useState } from "react";
-import uuid from "react-native-uuid";
-
+import * as Clipboard from "expo-clipboard";
 import { GiftedChat } from "react-native-gifted-chat";
 import { auth, db } from "../../firebase/firebase";
 
@@ -37,7 +36,6 @@ function Chat(groupId) {
   }, []);
 
   const fav = (message) => {
-    const id = uuid.v4();
     db.collection("Fav")
       .doc(user1.email)
       .collection("classes")
@@ -81,8 +79,8 @@ function Chat(groupId) {
       (buttonIndex) => {
         switch (buttonIndex) {
           case 0:
-            Clipboard.setString(this.props.currentMessage.text);
-          // break;
+            Clipboard.setString("1");
+            break;
           case 1:
             // console.log("11111111111111111111111111111111111111111111");
             fav(message);

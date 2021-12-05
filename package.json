@@ -32,7 +32,8 @@
     "react-native-screens": "~3.8.0",
     "react-native-uuid": "^2.0.1",
     "react-native-web": "0.17.1",
-    "yup": "^0.28.5"
+    "yup": "^0.28.5",
+    "expo-clipboard": "~2.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
