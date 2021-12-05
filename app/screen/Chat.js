@@ -98,6 +98,7 @@ function Chat(groupId) {
       messages={messages}
       onLongPress={onLongPress}
       showAvatarForEveryMessage={true}
+      renderUsernameOnMessage={true}
       onSend={(messages) => onSend(messages)}
       user={{
         _id: auth?.currentUser?.email,
