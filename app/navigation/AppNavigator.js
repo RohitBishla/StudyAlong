@@ -11,6 +11,7 @@ import TimerScreen from "../screen/TimerScreen";
 import Chat from "../screen/Chat";
 import GroupsList from "../screen/GroupsList";
 import ChatNavigator from "./ChatNavigator";
+import FavMessageScreen from "../screen/FavMessageScreen";
 const Tab = createBottomTabNavigator();
 
 const AppNavigator = () => (
@@ -59,7 +60,7 @@ const AppNavigator = () => (
     />
     <Tab.Screen
       name="Favorite"
-      component={MessagesScreen}
+      component={FavMessageScreen}
       options={{
         tabBarIcon: ({ color, size }) => (
           <MaterialCommunityIcons name="heart" color={color} size={size} />

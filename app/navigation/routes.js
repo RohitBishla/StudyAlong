@@ -8,4 +8,5 @@ export default Object.freeze({
   GROUPSLIST: "GroupsList",
   CHAT: "Chat",
   LISTINGDETAILSSCREEN: "ListingDetailsScreen",
+  FAVMESSAGESCREEN: "Favorite",
 });

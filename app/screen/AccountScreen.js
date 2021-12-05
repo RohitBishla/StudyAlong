@@ -17,7 +17,7 @@ function AccountScreen({ navigation }) {
         name: "heart",
         backgroundColor: colors.primary,
       },
-      targetScreen: routes.MESSAGES,
+      targetScreen: routes.FAVMESSAGESCREEN,
     },
     {
       title: "My Messages",

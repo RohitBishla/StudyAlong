@@ -26,7 +26,7 @@ import Chat from "./Chat";
 //   },
 // ];
 
-function GroupList({ navigation }) {
+function FavMessageScreen({ navigation }) {
   const user = auth.currentUser;
 
   const handleDelete = (message) => {
@@ -34,12 +34,12 @@ function GroupList({ navigation }) {
     setMessages(messages.filter((m) => m.id !== message.id));
   };
   const [createdClasses, setCreatedClasses] = useState([]);
-  const [joinedClasses, setJoinedClasses] = useState([]);
+  //   const [joinedClasses, setJoinedClasses] = useState([]);
 
   useEffect(() => {
     if (user.email) {
       let unsubscribe = db
-        .collection("CreatedClasses")
+        .collection("Fav")
         .doc(user.email)
         .collection("classes")
         .onSnapshot((snapshot) => {
@@ -50,19 +50,19 @@ function GroupList({ navigation }) {
     }
   }, [user.email]);
 
-  useEffect(() => {
-    if (user.email) {
-      let unsubscribe = db
-        .collection("JoinedClasses")
-        .doc(user.email)
-        .collection("classes")
-        .onSnapshot((snapshot) => {
-          setJoinedClasses(snapshot.docs.map((doc) => doc.data().joinedData));
-        });
+  //   useEffect(() => {
+  //     if (user.email) {
+  //       let unsubscribe = db
+  //         .collection("JoinedClasses")
+  //         .doc(user.email)
+  //         .collection("classes")
+  //         .onSnapshot((snapshot) => {
+  //           setJoinedClasses(snapshot.docs.map((doc) => doc.data().joinedData));
+  //         });
 
-      return () => unsubscribe();
-    }
-  }, [user.email]);
+  //       return () => unsubscribe();
+  //     }
+  //   }, [user.email]);
   //   console.log(joinedClasses, createdClasses);
 
   const [messages, setMessages] = useState(createdClasses);
@@ -74,13 +74,15 @@ function GroupList({ navigation }) {
         keyExtractor={(message) => message.id.toString()}
         renderItem={({ item }) => (
           <ListItem
-            title={item.className}
+            title={item.title}
             subTitle={item.description}
             image={require("../assets/images2.jpeg")}
-            onPress={() =>
-              navigation.navigate("Chat", {
-                groupId: [item.id, item.className, item.owner],
-              })
+            onPress={
+              () =>
+                navigation.navigate("Chat", {
+                  groupId: [item.id, item.className, item.owner],
+                })
+              //   console.log(item)
             }
             renderRightActions={() => (
               <ListItemDeleteAction onPress={() => handleDelete(item)} />
@@ -90,7 +92,7 @@ function GroupList({ navigation }) {
         ItemSeparatorComponent={ListItemSeparator}
         refreshing={refreshing}
         onRefresh={() => {
-          setMessages(joinedClasses.concat(createdClasses));
+          setMessages(createdClasses);
         }}
       />
     </Screen>
@@ -99,4 +101,4 @@ function GroupList({ navigation }) {
 
 const styles = StyleSheet.create({});
 
-export default GroupList;
+export default FavMessageScreen;
